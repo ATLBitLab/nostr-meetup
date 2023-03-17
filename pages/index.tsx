@@ -15,8 +15,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+
+        <p className="text-red-400 text-4xl font-bold">
+          TEST TEST TEST
+        </p>
+
         <div className={styles.description}>
-          <p>
+          <p className="text-red-400 text-lg font-bold">
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
           </p>
