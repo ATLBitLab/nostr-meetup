@@ -1,4 +1,4 @@
-import { Head } from "next/document";
+import Head from 'next/head'
 import Link from "next/link";
 import React from "react";
 import { Inter } from 'next/font/google'
@@ -12,8 +12,16 @@ interface LandingLayoutProps {
 }
 
 export default function LandingLayout(props:LandingLayoutProps) {
+    const defaultDescription = "Find meetup groups and events"
+
     return(
         <>
+            <Head>
+                <title>{props.title ? props.title + " | " : ""}Catherd</title>
+                <meta name="description" content={props.description || defaultDescription} />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div>
                 <header>
                     <Link href={'/'}>Nostr Meetup</Link>

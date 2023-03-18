@@ -1,16 +1,10 @@
 import Head from 'next/head'
 import LandingLayout from '@/components/LandingLayout'
 
-export default function Login() {
+export default function GroupDetail() {
   return (
     <>
-      <Head>
-        <title>Group Detail</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <LandingLayout title="Group Detail" description="">
+      <LandingLayout title="Group Detail" description="All about this group">
         <div>This is the group detail page</div>
       </LandingLayout>
     </>

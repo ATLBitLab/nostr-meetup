@@ -1,16 +1,10 @@
 import Head from 'next/head'
 import LandingLayout from '@/components/LandingLayout'
 
-export default function Login() {
+export default function EventDetail() {
   return (
     <>
-      <Head>
-        <title>Event Detail</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <LandingLayout title="Group Detail" description="">
+      <LandingLayout title="Event Detail" description="All about this event">
         <div>This is the event detail page</div>
       </LandingLayout>
     </>
