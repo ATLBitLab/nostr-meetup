@@ -1,5 +1,3 @@
-import useNostr from "../hooks/useNostr";
-import Events from "~/components/Events";
 import { useZodForm } from "../utils/useZodForm";
 import { z } from "zod";
 
@@ -16,18 +14,7 @@ const defaultTopics = [
 ];
 
 export default function Home() {
-  const { pubkey } = useNostr();
-
-  const {
-    register,
-    handleSubmit,
-    setError,
-    setValue,
-    getValues,
-    watch,
-    reset,
-    formState: { errors },
-  } = useZodForm({
+  const { register, handleSubmit } = useZodForm({
     mode: "onSubmit",
     schema: z.object({
       topic: z.string().optional(),
@@ -68,7 +55,10 @@ export default function Home() {
           <div className="flex gap-2 flex-wrap">
             {defaultTopics.map((dt) => {
               return (
-                <button className="capitalize px-2 py-1 border rounded border-gray-700 w-fit">
+                <button
+                  key={dt}
+                  className="capitalize px-2 py-1 border rounded border-gray-700 w-fit"
+                >
                   {dt}
                 </button>
               );
