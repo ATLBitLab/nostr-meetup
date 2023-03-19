@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useDeepCompareEffect from "use-deep-compare-effect";
 import { Filter, Event as NostrEvent } from "nostr-tools";
-// import useNostr from "./useNostr";
 import pool from "~/lib/Pool";
 
 const useGet = (relays: string[], filter: Filter) => {
-  // const pool = useNostr();
   const [note, setNote] = useState<NostrEvent | null>(null);
 
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     const nostrGet = async () => {
       const res = await pool.get([...relays], filter);
       setNote(res);
@@ -15,8 +14,7 @@ const useGet = (relays: string[], filter: Filter) => {
     };
 
     nostrGet();
-    // }, [relays, filter]);
-  }, []);
+  }, [relays, filter]);
 
   return note;
 };

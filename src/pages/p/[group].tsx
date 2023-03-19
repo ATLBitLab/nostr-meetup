@@ -1,6 +1,6 @@
 import { nip19 } from "nostr-tools";
 import { useRouter } from "next/router";
-import { group } from "console";
+import useProfile from "@/src/hooks/useProfile";
 
 interface MeetupType {
   name: string;
@@ -47,7 +47,7 @@ const testMeetups: MeetupType[] = [
 
 const Meetup = ({ info }: { info: MeetupType }) => {
   return (
-    <div className="flex border rounded w-1/2 p-4 gap-4">
+    <div className="flex border rounded p-4 gap-4">
       <img className="h-32 w-32" src={info.picture} height={128} width={128} />
 
       <div className="flex flex-col gap-2">
@@ -103,11 +103,22 @@ const getChannelPubkey = (
   }
 };
 
+const relays = [
+  "wss://nostr.terminus.money",
+  "wss://brb.io",
+  "wss://nostr.wine",
+  "wss://relay.snort.social",
+  "wss://gratten.duckdns.org/nostrrelay/relay2",
+];
+
 export default function Group() {
   const { query, isReady } = useRouter();
 
   const groupPubkey = getChannelPubkey(query?.group, isReady);
   console.debug("groupPubkey", groupPubkey);
+
+  const profile = useProfile(relays, groupPubkey);
+  console.debug("profile", profile);
 
   if (!isReady) {
     return <div className="h-full bg-white"></div>;
@@ -118,9 +129,36 @@ export default function Group() {
   }
 
   return (
-    <div className="h-full px-32 bg-white overflow-y-auto">
-      <h1 className="text-3xl">Meetups</h1>
-      <div className="flex flex-col gap-6">
+    <div className="flex flex-col h-full px-64 bg-white overflow-y-auto gap-8 pt-8">
+      <div className="w-full flex gap-8">
+        {profile?.picture ? (
+          <img className="w-64 h-64 shrink-0" src={profile.picture}></img>
+        ) : (
+          <div className="w-64 h-64 bg-gray-300 shrink-0"> </div>
+        )}
+
+        <div className="flex flex-col gap-4 pt-4 w-full">
+          {/* <h1 className="text-3xl">
+                {profile?.name
+                  ? profile.name
+                  : nip19.npubEncode(groupPubkey)}
+              </h1> */}
+
+          {/* <div> */}
+          {profile?.name ? (
+            <h1 className="text-3xl">{profile.name}</h1>
+          ) : (
+            <h1 className="text-3xl truncate">
+              {nip19.npubEncode(groupPubkey)}
+            </h1>
+          )}
+          {profile?.nip05 && <h2 className="text-xl">{profile.nip05}</h2>}
+          {/* </div> */}
+          {profile?.about && <p>{profile.about}</p>}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-6 w-2/3">
         {testMeetups.map((m) => {
           return <Meetup key={m.id} info={m} />;
         })}
