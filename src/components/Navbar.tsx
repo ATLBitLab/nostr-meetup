@@ -51,7 +51,7 @@ const Navbar = () => {
                 bg-gray-500 px-2 py-4 right-0 
               `}
             >
-              <li className="">
+              <li>
                 <Link href="/">
                   <p onClick={handleLogout}>Logout</p>
                 </Link>
