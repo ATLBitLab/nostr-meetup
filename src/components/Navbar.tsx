@@ -52,6 +52,11 @@ const Navbar = () => {
               `}
             >
               <li>
+                <Link href="/demo">
+                  <p>Demo</p>
+                </Link>
+              </li>
+              <li>
                 <Link href="/">
                   <p onClick={handleLogout}>Logout</p>
                 </Link>
