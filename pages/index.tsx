@@ -1,11 +1,5 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 import LandingLayout from '@/components/LandingLayout'
 import Tag from '@/components/Tag'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const topics = [
@@ -25,22 +19,39 @@ export default function Home() {
       name: 'Art',
       slug: 'art',
     },
+    {
+      name: 'Spirituality',
+      slug: 'art',
+    },
+    {
+      name: 'Comedy',
+      slug: 'comedy',
+    },
+    {
+      name: 'Photogrphy',
+      slug: 'photography',
+    },
+    {
+      name: 'Movies',
+      slug: 'movies',
+    },
   ]
 
   return (
     <>
       <LandingLayout description="Meetup with folks using Nostr meetup">
-        <>
-          <h1>Nostr Meetup</h1>
-          <p>Find people with shared interests and meetups to attend</p>
-          <h2>Topics</h2>
-          <div className="flex flex-row gap-4">
-            {topics.map((topic, key)=>(
-              <Tag name={topic.name} slug={topic.slug} key={key} />
-            ))}
+        <div className="bg-purple-600 min-h-full p-4">
+          <div className="bg-white p-4 rounded-md drop-shadow-sm">
+            <h1 className="sr-only">Nostr Meetup</h1>
+            <p className="font-display text-3xl mb-4">Find people with shared interests and meetups to attend</p>
+            <h2 className="font-display font-bold text-2xl mb-4">Topics</h2>
+            <div className="flex flex-row flex-wrap gap-4">
+              {topics.map((topic, key)=>(
+                <Tag name={topic.name} slug={topic.slug} key={key} />
+              ))}
+            </div>
           </div>
-          
-        </>
+        </div>
       </LandingLayout>
     </>
   )

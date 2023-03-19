@@ -1,9 +1,7 @@
 import Head from 'next/head'
 import Link from "next/link";
 import React from "react";
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Comfortaa, Source_Sans_Pro } from 'next/font/google'
 
 interface LandingLayoutProps {
     title?: string,
@@ -13,6 +11,26 @@ interface LandingLayoutProps {
 
 export default function LandingLayout(props:LandingLayoutProps) {
     const defaultDescription = "Find meetup groups and events"
+    const [menuOpen, setMenuOpen] = React.useState(false)
+
+    const menuClickHandler = ()=>{
+        setMenuOpen(!menuOpen)
+    }
+
+    const menuItems = [
+        {
+            name: 'Feed',
+            uri: '/feed'
+        },
+        {
+            name: 'Log In',
+            uri: '/login'
+        },
+        {
+            name: 'Sign Up',
+            uri: '/signup'
+        },
+    ]
 
     return(
         <>
@@ -21,25 +39,33 @@ export default function LandingLayout(props:LandingLayoutProps) {
                 <meta name="description" content={props.description || defaultDescription} />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
+                <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet"></link>
             </Head>
-            <div>
-                <header>
-                    <Link href={'/'}>Nostr Meetup</Link>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link href={'/feed'}>Feed</Link>
-                            </li>
-                            <li>
-                                <Link href={'/signup'}>Sign Up</Link>
-                            </li>
-                            <li>
-                                <Link href={'/login'}>Login In</Link>
-                            </li>
+            <div className="h-full pt-20">
+                <header className="min-h-[5rem] font-display flex flex-col p-4 justify-between items-center border border-gray-300 drop-shadow-md fixed top-0 left-0 w-full z-50 bg-white lg:flex-row">
+                    <div className="flex flex-row justify-between w-full">
+                        <Link href={'/'} className="text-4xl lowercase">
+                            <span className="font-bold">Cat</span>
+                            <span className="font-light">Herd</span>
+                        </Link>
+                        
+                        <button onClick={menuClickHandler}>
+                            Menu
+                        </button>
+                    </div>
+                    
+
+                    <nav className={menuOpen ? "hidden" : "w-full"}>
+                        <ul className="flex flex-col text-center gap-4 lg:flex-row">
+                            {menuItems.map((menuItem, key)=>(
+                                <li key={key}>
+                                    <Link href={menuItem.uri}>{menuItem.name}</Link>
+                                </li>
+                            ))}
                         </ul>
                     </nav>
                 </header>
-                <main>
+                <main className="h-full">
                     {props.children}
                 </main>
             </div>
