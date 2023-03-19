@@ -1,6 +1,5 @@
-import { useState } from "react";
 import useNostr from "../hooks/useNostr";
-// import Link from 'next/link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Login() {
@@ -38,14 +37,11 @@ export default function Login() {
         {/* Sign up link */}
         <div className="flex flex-col gap-2">
           <p>Not on Nostr yet? Sign up.</p>
-          <button
-            className="border rounded border-purple-700 text-purple-700 px-2 py-1 w-fit"
-            onClick={() => {
-              console.log("TODO: Redirect");
-            }}
-          >
-            Sign up
-          </button>
+          <Link href="/signup">
+            <button className="border rounded border-purple-700 text-purple-700 px-2 py-1 w-fit">
+              Sign up
+            </button>
+          </Link>
         </div>
       </div>
     </div>
