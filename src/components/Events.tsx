@@ -11,7 +11,7 @@ const relays = [
 
 export default function Events() {
   const filters: Filter = {
-    // since: Math.floor(Date.now() / 1000),
+    since: Math.floor(Date.now() / 1000),
     kinds: [1],
   };
 

@@ -17,7 +17,7 @@ export default function Demo() {
 
   const disabled = !pubkey;
 
-  const { register, handleSubmit } = useZodForm({
+  const { register, handleSubmit, setValue } = useZodForm({
     mode: "onSubmit",
     schema: z.object({
       content: z.string(),
@@ -71,6 +71,8 @@ export default function Demo() {
       console.debug("err", err);
     }
 
+    setValue("content", "");
+
     console.debug("done");
   };
 
@@ -82,6 +84,7 @@ export default function Demo() {
           <input
             className="border rounded border-gray-700 grow px-2 py-1"
             placeholder="Kind-1 message content"
+            autoComplete="off"
             disabled={disabled}
             {...register("content")}
           />

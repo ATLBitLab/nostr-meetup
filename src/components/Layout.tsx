@@ -14,7 +14,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       <div className="flex h-screen w-screen flex-col bg-white">
         <Navbar />
-        <main className="flex flex-col h-full bg-gray-400">{children}</main>
+        <main className="flex flex-col h-full bg-white overflow-y-auto">
+          {children}
+        </main>
       </div>
     </>
   );
