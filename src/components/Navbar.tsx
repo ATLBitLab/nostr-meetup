@@ -16,7 +16,6 @@ const Navbar = () => {
   };
 
   return (
-    // <div className="flex justify-between w-full py-2 px-4">
     <div className="flex justify-between py-2 px-4">
       <Link href="/">
         <p className="font-semibold text-2xl">catherd</p>
@@ -39,7 +38,7 @@ const Navbar = () => {
 
           <div id="dropdown" className="">
             <div
-              className="rounded-[50%] bg-gray-400 h-12 w-12"
+              className="rounded-[50%] bg-gray-400 h-8 w-8"
               onClick={() => setOpenAccountMenu(!openAccountMenu)}
               id="temp profile button"
             />
