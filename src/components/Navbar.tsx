@@ -52,13 +52,13 @@ const Navbar = () => {
               `}
             >
               <li>
-                <Link href="/demo">
+                <Link href="/demo" onClick={() => setOpenAccountMenu(false)}>
                   <p>Demo</p>
                 </Link>
               </li>
               <li>
-                <Link href="/">
-                  <p onClick={handleLogout}>Logout</p>
+                <Link href="/" onClick={handleLogout}>
+                  <p>Logout</p>
                 </Link>
               </li>
             </ul>

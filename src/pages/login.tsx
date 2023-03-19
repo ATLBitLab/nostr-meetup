@@ -42,6 +42,7 @@ export default function Login() {
           </div>
         )}
 
+        {/* Recommend installing Nostr browser extension */}
         {!nostrExt && (
           <div>
             <p>Nostr browser extension required!</p>
@@ -50,7 +51,7 @@ export default function Login() {
               href="https://getalby.com/"
               className="capitalize text-purple-700 hover:underline"
             >
-              Alby
+              alby
             </a>
             <span>,&nbsp;</span>
             <a
