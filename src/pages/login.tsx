@@ -1,11 +1,17 @@
+import { useEffect, useState } from "react";
 import useNostr from "../hooks/useNostr";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Login() {
   const { setPubkey } = useNostr();
-
   const router = useRouter();
+
+  const [nostrExt, setNostrExt] = useState(false);
+
+  useEffect(() => {
+    setNostrExt("nostr" in window);
+  }, []);
 
   const handleLogin = async () => {
     try {
@@ -24,15 +30,37 @@ export default function Login() {
         <h1 className="text-3xl font-semibold">Log In</h1>
 
         {/* Login with nostr ext */}
-        <div className="flex flex-col gap-2">
-          <p> Log in with a Nostr browser extension </p>
-          <button
-            className="border rounded bg-purple-700 text-white px-2 py-1 w-fit"
-            onClick={handleLogin}
-          >
-            Log in with Nostr
-          </button>
-        </div>
+        {nostrExt && (
+          <div className="flex flex-col gap-2">
+            <p> Log in with a Nostr browser extension </p>
+            <button
+              className="border rounded bg-purple-700 text-white px-2 py-1 w-fit"
+              onClick={handleLogin}
+            >
+              Log in with Nostr
+            </button>
+          </div>
+        )}
+
+        {!nostrExt && (
+          <div>
+            <p>Nostr browser extension required!</p>
+            <span>Get one here: &nbsp;</span>
+            <a
+              href="https://getalby.com/"
+              className="capitalize text-purple-700 hover:underline"
+            >
+              Alby
+            </a>
+            <span>,&nbsp;</span>
+            <a
+              href="https://github.com/fiatjaf/nos2x"
+              className="capitalize text-purple-700 hover:underline"
+            >
+              nos2x
+            </a>
+          </div>
+        )}
 
         {/* Sign up link */}
         <div className="flex flex-col gap-2">
