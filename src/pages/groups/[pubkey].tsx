@@ -114,17 +114,17 @@ const relays = [
 export default function Group() {
   const { query, isReady } = useRouter();
 
-  const groupPubkey = getChannelPubkey(query?.group, isReady);
-  console.debug("groupPubkey", groupPubkey);
+  const hexkey = getChannelPubkey(query?.pubkey, isReady);
+  console.debug("hexkey", hexkey);
 
-  const profile = useProfile(relays, groupPubkey);
+  const profile = useProfile(relays, hexkey);
   console.debug("profile", profile);
 
   if (!isReady) {
     return <div className="h-full bg-white"></div>;
   }
 
-  if (!groupPubkey) {
+  if (!hexkey) {
     return <p>Invalid hex public key or bech32 public key!</p>;
   }
 
@@ -141,16 +141,14 @@ export default function Group() {
           {/* <h1 className="text-3xl">
                 {profile?.name
                   ? profile.name
-                  : nip19.npubEncode(groupPubkey)}
+                  : nip19.npubEncode(hexkey)}
               </h1> */}
 
           {/* <div> */}
           {profile?.name ? (
             <h1 className="text-3xl">{profile.name}</h1>
           ) : (
-            <h1 className="text-3xl truncate">
-              {nip19.npubEncode(groupPubkey)}
-            </h1>
+            <h1 className="text-3xl truncate">{nip19.npubEncode(hexkey)}</h1>
           )}
           {profile?.nip05 && <h2 className="text-xl">{profile.nip05}</h2>}
           {/* </div> */}
