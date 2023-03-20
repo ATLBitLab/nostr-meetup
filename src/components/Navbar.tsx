@@ -5,6 +5,7 @@ import useNostr from "~/hooks/useNostr";
 import ClickAwayListener from "react-click-away-listener";
 import useProfile from "~/hooks/useProfile";
 import { nip19 } from "nostr-tools";
+import { npubEncode } from "nostr-tools/lib/nip19";
 
 const relays = [
   "wss://nostr.terminus.money",
@@ -71,7 +72,7 @@ export default function Navbar() {
               >
                 <li>
                   <Link
-                    href="profile"
+                    href={`/p/${nip19.npubEncode(pubkey)}`}
                     onClick={() => setOpenAccountMenu(false)}
                   >
                     <p>Profile</p>

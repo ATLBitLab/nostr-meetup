@@ -1,9 +1,25 @@
 import { MeetupType } from "../types";
 
-export default function Meetup({ info }: { info: MeetupType }) {
+export default function MeetupCard({
+  info,
+  minimized = false,
+}: {
+  info: MeetupType;
+  minimized?: boolean;
+}) {
+  console.debug("minimized", minimized);
   return (
-    <div className="flex border rounded p-4 gap-4">
-      <img className="h-32 w-32" src={info.picture} height={128} width={128} />
+    <div
+      className={`${
+        minimized ? "w-1/3" : "w-full"
+      } flex border rounded p-4 gap-4`}
+    >
+      <img
+        className="h-32 w-32 rounded"
+        src={info.picture}
+        height={128}
+        width={128}
+      />
 
       <div className="flex flex-col gap-2">
         <div>
@@ -12,7 +28,7 @@ export default function Meetup({ info }: { info: MeetupType }) {
           <h3 className="text-lg font-light capitalize">{info.location}</h3>
         </div>
 
-        <p>{info.about}</p>
+        {!minimized && <p>{info.about}</p>}
 
         <div className="flex gap-2">
           <button className="border rounded w-fit bg-purple-600 capitalize text-white px-2 py-1">
