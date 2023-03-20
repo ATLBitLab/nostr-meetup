@@ -4,6 +4,7 @@ import useProfile from "~/hooks/useProfile";
 import { MeetupType } from "@/src/types";
 import MeetupCard from "@/src/components/MeetupCard";
 import ProfileCard from "@/src/components/ProfileCard";
+import Link from "next/link";
 
 // Profile view into a pubkey
 // Displays a list of upcoming events from all groups the pubkey attends
@@ -79,7 +80,11 @@ export default function Group() {
       <h1 className="text-3xl font-semibold">Groups you attend</h1>
       <div className="flex gap-6 w-full">
         {testPubkeys.map((pk) => {
-          return <ProfileCard minimized pubkey={pk} key={pk} />;
+          return (
+            <Link href={`/g/${pk}`} className="w-1/3">
+              <ProfileCard minimized pubkey={pk} key={pk} />
+            </Link>
+          );
         })}
       </div>
     </div>

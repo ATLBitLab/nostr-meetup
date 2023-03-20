@@ -1,5 +1,6 @@
 import { nip19 } from "nostr-tools";
 import useProfile from "../hooks/useProfile";
+import Link from "next/link";
 
 export default function ProfileCard({
   pubkey,
