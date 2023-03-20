@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from "next/link";
 import React from "react";
 import { Comfortaa, Source_Sans_Pro } from 'next/font/google'
+import { Bars3Icon } from '@heroicons/react/24/solid'
 
 interface LandingLayoutProps {
     title?: string,
@@ -49,14 +50,18 @@ export default function LandingLayout(props:LandingLayoutProps) {
                             <span className="font-light">Herd</span>
                         </Link>
                         
-                        <button onClick={menuClickHandler}>
-                            Menu
+                        <button onClick={menuClickHandler} className="lg:hidden">
+                            <span className="sr-only">Menu</span>
+                            <Bars3Icon className="w-6 h-6" />
                         </button>
                     </div>
                     
-
-                    <nav className={menuOpen ? "hidden" : "w-full"}>
-                        <ul className="flex flex-col text-center gap-4 lg:flex-row">
+                    <nav className={
+                        !menuOpen
+                        ? "hidden lg:block w-full justify-end"
+                        : "w-full"
+                    }>
+                        <ul className="flex flex-col text-center gap-4 lg:flex-row py-4 border-t mt-4 lg:border-0 lg:justify-end">
                             {menuItems.map((menuItem, key)=>(
                                 <li key={key}>
                                     <Link href={menuItem.uri}>{menuItem.name}</Link>
