@@ -7,13 +7,8 @@ export default function MeetupCard({
   info: MeetupType;
   minimized?: boolean;
 }) {
-  console.debug("minimized", minimized);
   return (
-    <div
-      className={`${
-        minimized ? "w-1/3" : "w-full"
-      } flex border rounded p-4 gap-4`}
-    >
+    <div className="flex border rounded p-4 gap-4">
       <img
         className="h-32 w-32 rounded"
         src={info.picture}
@@ -31,12 +26,17 @@ export default function MeetupCard({
         {!minimized && <p>{info.about}</p>}
 
         <div className="flex gap-2">
+          {/* TODO: Publish attend event */}
           <button className="border rounded w-fit bg-purple-600 capitalize text-white px-2 py-1">
             attend
           </button>
+
+          {/* TODO: Link to event id */}
+          {/* <Link href={`/event/${}`}> */}
           <button className="border rounded w-fit border-purple-600 capitalize text-purple-600 px-2 py-1">
             learn more
           </button>
+          {/* </Link> */}
         </div>
       </div>
     </div>

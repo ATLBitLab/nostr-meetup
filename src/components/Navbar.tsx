@@ -72,7 +72,7 @@ export default function Navbar() {
               >
                 <li>
                   <Link
-                    href={`/p/${nip19.npubEncode(pubkey)}`}
+                    href={`/profile/${nip19.npubEncode(pubkey)}`}
                     onClick={() => setOpenAccountMenu(false)}
                   >
                     <p>Profile</p>

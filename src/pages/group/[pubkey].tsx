@@ -22,21 +22,21 @@ const testMeetups: MeetupType[] = [
     id: "123",
   },
   {
-    name: "OS People from Somewhere",
+    name: "Atlanta BitDevs",
     about:
       "Mauris vitae ultricies leo integer. Auctor eu augue ut lectus arcu. Non nisi est sit amet facilisis magna. Amet nisl purus in mollis nunc sed id. Lobortis mattis aliquam faucibus purus in massa tempor nec feugiat. Cursus mattis molestie a iaculis at erat. Tristique senectus et netus et. Dapibus ultrices in iaculis nunc sed augue lacus viverra vitae. Ipsum consequat nisl vel pretium lectus quam. Ac auctor augue mauris augue neque gravida. Consectetur adipiscing elit pellentesque habitant. Tellus molestie nunc non blandit. Risus nullam eget felis eget. Pellentesque habitant morbi tristique senectus et. Fermentum leo vel orci porta non pulvinar neque laoreet.",
-    picture: "https://picsum.photos/id/239/300/300",
-    date: "October 42, 2142",
+    picture: "https://picsum.photos/id/238/300/300",
+    date: "October 49, 2142",
     location: "Murrieta, CA",
     topics: ["programming", "linux"],
     id: "13",
   },
   {
-    name: "OS People from Somewhere",
+    name: "Atlanta BitDevs",
     about:
       "Mauris vitae ultricies leo integer. Auctor eu augue ut lectus arcu. Non nisi est sit amet facilisis magna. Amet nisl purus in mollis nunc sed id. Lobortis mattis aliquam faucibus purus in massa tempor nec feugiat. Cursus mattis molestie a iaculis at erat. Tristique senectus et netus et. Dapibus ultrices in iaculis nunc sed augue lacus viverra vitae. Ipsum consequat nisl vel pretium lectus quam. Ac auctor augue mauris augue neque gravida. Consectetur adipiscing elit pellentesque habitant. Tellus molestie nunc non blandit. Risus nullam eget felis eget. Pellentesque habitant morbi tristique senectus et. Fermentum leo vel orci porta non pulvinar neque laoreet.",
-    picture: "https://picsum.photos/id/240/300/300",
-    date: "October 42, 2142",
+    picture: "https://picsum.photos/id/238/300/300",
+    date: "October 56, 2142",
     location: "Murrieta, CA",
     topics: ["programming", "linux"],
     id: "2",
@@ -59,6 +59,8 @@ export default function Group() {
   return (
     <div className="flex flex-col h-full px-64 bg-white overflow-y-auto gap-8 pt-8">
       <ProfileCard pubkey={hexkey} />
+
+      <h1 className="text-3xl font-semibold">Upcoming events</h1>
       <div className="flex flex-col gap-6 w-2/3">
         {testMeetups.map((m) => {
           return <MeetupCard key={m.id} info={m} />;
