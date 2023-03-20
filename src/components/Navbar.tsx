@@ -3,11 +3,23 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import useNostr from "~/hooks/useNostr";
 import ClickAwayListener from "react-click-away-listener";
+import useProfile from "~/hooks/useProfile";
+import { nip19 } from "nostr-tools";
 
-const Navbar = () => {
+const relays = [
+  "wss://nostr.terminus.money",
+  "wss://brb.io",
+  "wss://nostr.wine",
+  "wss://relay.snort.social",
+  "wss://gratten.duckdns.org/nostrrelay/relay2",
+];
+
+export default function Navbar() {
   const { pubkey, setPubkey } = useNostr();
   const router = useRouter();
   const [openAccountMenu, setOpenAccountMenu] = useState(false);
+
+  const profile = useProfile(pubkey, relays);
 
   const handleLogout = () => {
     setPubkey(null);
@@ -21,7 +33,6 @@ const Navbar = () => {
       <Link href="/">
         <p className="font-semibold text-2xl">catherd</p>
       </Link>
-
       {!pubkey && (
         <div className="flex gap-4 text-lg items-center">
           <Link href="/login">
@@ -35,7 +46,12 @@ const Navbar = () => {
 
       {pubkey && (
         <div className="flex gap-4 text-lg items-center">
-          <p>Welcome, {pubkey.slice(0, 12)}</p>
+          <h1 className="">
+            Welcome,{" "}
+            {profile?.name
+              ? profile.name
+              : nip19.npubEncode(pubkey).slice(0, 12)}
+          </h1>
 
           <ClickAwayListener onClickAway={() => setOpenAccountMenu(false)}>
             <div id="dropdown" className="">
@@ -70,5 +86,4 @@ const Navbar = () => {
       )}
     </div>
   );
-};
-export default Navbar;
+}

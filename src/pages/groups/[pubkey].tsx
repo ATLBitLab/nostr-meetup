@@ -103,22 +103,13 @@ const getChannelPubkey = (
   }
 };
 
-const relays = [
-  "wss://nostr.terminus.money",
-  "wss://brb.io",
-  "wss://nostr.wine",
-  "wss://relay.snort.social",
-  "wss://gratten.duckdns.org/nostrrelay/relay2",
-];
-
 export default function Group() {
   const { query, isReady } = useRouter();
 
   const hexkey = getChannelPubkey(query?.pubkey, isReady);
   console.debug("hexkey", hexkey);
 
-  const profile = useProfile(relays, hexkey);
-  console.debug("profile", profile);
+  const profile = useProfile(hexkey);
 
   if (!isReady) {
     return <div className="h-full bg-white"></div>;
@@ -138,24 +129,16 @@ export default function Group() {
         )}
 
         <div className="flex flex-col gap-4 pt-4 w-full">
-          {/* <h1 className="text-3xl">
-                {profile?.name
-                  ? profile.name
-                  : nip19.npubEncode(hexkey)}
-              </h1> */}
-
-          {/* <div> */}
+          {/* TODO:  npub doesn't overflow right*/}
           {profile?.name ? (
             <h1 className="text-3xl">{profile.name}</h1>
           ) : (
             <h1 className="text-3xl truncate">{nip19.npubEncode(hexkey)}</h1>
           )}
           {profile?.nip05 && <h2 className="text-xl">{profile.nip05}</h2>}
-          {/* </div> */}
           {profile?.about && <p>{profile.about}</p>}
         </div>
       </div>
-
       <div className="flex flex-col gap-6 w-2/3">
         {testMeetups.map((m) => {
           return <Meetup key={m.id} info={m} />;
