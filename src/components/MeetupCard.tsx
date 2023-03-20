@@ -1,4 +1,5 @@
 import { MeetupType } from "../types";
+import Link from "next/link";
 
 export default function MeetupCard({
   info,
@@ -9,12 +10,7 @@ export default function MeetupCard({
 }) {
   return (
     <div className="flex border rounded p-4 gap-4">
-      <img
-        className="h-32 w-32 rounded"
-        src={info.picture}
-        height={128}
-        width={128}
-      />
+      <img className="h-32 w-32 rounded" src={info.picture} />
 
       <div className="flex flex-col gap-2">
         <div>
@@ -32,11 +28,11 @@ export default function MeetupCard({
           </button>
 
           {/* TODO: Link to event id */}
-          {/* <Link href={`/event/${}`}> */}
-          <button className="border rounded w-fit border-purple-600 capitalize text-purple-600 px-2 py-1">
-            learn more
-          </button>
-          {/* </Link> */}
+          <Link href={`/meetup/${info.id}`}>
+            <button className="border rounded w-fit border-purple-600 capitalize text-purple-600 px-2 py-1">
+              learn more
+            </button>
+          </Link>
         </div>
       </div>
     </div>
