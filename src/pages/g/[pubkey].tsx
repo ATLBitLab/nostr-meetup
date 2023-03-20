@@ -1,16 +1,9 @@
 import { nip19 } from "nostr-tools";
 import { useRouter } from "next/router";
+import { queryToPubkey } from "@/src/utils/nostr";
 import useProfile from "@/src/hooks/useProfile";
-
-interface MeetupType {
-  name: string;
-  about: string;
-  picture: string;
-  date: string;
-  location: string;
-  topics: string[];
-  id: string;
-}
+import { MeetupType } from "@/src/types";
+import Meetup from "@/src/components/MeetupCard";
 
 const testMeetups: MeetupType[] = [
   {
@@ -45,68 +38,10 @@ const testMeetups: MeetupType[] = [
   },
 ];
 
-const Meetup = ({ info }: { info: MeetupType }) => {
-  return (
-    <div className="flex border rounded p-4 gap-4">
-      <img className="h-32 w-32" src={info.picture} height={128} width={128} />
-
-      <div className="flex flex-col gap-2">
-        <div>
-          <h1 className="text-2xl font-semibold capitalize">{info.name}</h1>
-          <h2 className="text-xl font-light capitalize">{info.date}</h2>
-          <h3 className="text-lg font-light capitalize">{info.location}</h3>
-        </div>
-
-        <p>{info.about}</p>
-
-        <div className="flex gap-2">
-          <button className="border rounded w-fit bg-purple-600 capitalize text-white px-2 py-1">
-            attend
-          </button>
-          <button className="border rounded w-fit border-purple-600 capitalize text-purple-600 px-2 py-1">
-            learn more
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const getChannelPubkey = (
-  group: string[] | string | undefined,
-  isReady: boolean
-) => {
-  if (!isReady) return null;
-  if (typeof group !== "string") return null;
-  if (group.startsWith("npub1")) {
-    try {
-      let { type, data: nipData } = nip19.decode(group);
-      if (type === "npub") {
-        return nipData as string;
-      } else {
-        return null;
-      }
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  }
-
-  // might be hex format
-  try {
-    // try npub encode to validate hex public key
-    nip19.npubEncode(group);
-    return group;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
-
 export default function Group() {
   const { query, isReady } = useRouter();
 
-  const hexkey = getChannelPubkey(query?.pubkey, isReady);
+  const hexkey = queryToPubkey(query?.pubkey, isReady);
   console.debug("hexkey", hexkey);
 
   const profile = useProfile(hexkey);

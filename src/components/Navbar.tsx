@@ -70,6 +70,14 @@ export default function Navbar() {
               `}
               >
                 <li>
+                  <Link
+                    href="profile"
+                    onClick={() => setOpenAccountMenu(false)}
+                  >
+                    <p>Profile</p>
+                  </Link>
+                </li>
+                <li>
                   <Link href="/demo" onClick={() => setOpenAccountMenu(false)}>
                     <p>Demo</p>
                   </Link>
