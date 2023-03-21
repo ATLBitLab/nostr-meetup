@@ -31,7 +31,7 @@ const PubkeyNavMenu = ({ pubkey }: { pubkey: string }) => {
                 <img src={userData.picture} className="w-8 h-8 rounded-[50%]" />
             ) : (
                 <li>
-                    <div className="w-8 h-8 rounded-[50%] bg-gray-700"></div>
+                    <div className="w-8 h-8 rounded-[50%] bg-gray-700" />
                 </li>
             )}
         </>
