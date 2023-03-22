@@ -14,6 +14,7 @@ interface LandingLayoutProps {
 }
 
 const PubkeyNavMenu = ({ pubkey }: { pubkey: string }) => {
+    const { setPubkey } = usePubkey();
     const { data: userData, isLoading } = useProfile({
         pubkey,
     });
@@ -34,6 +35,7 @@ const PubkeyNavMenu = ({ pubkey }: { pubkey: string }) => {
                     <div className="w-8 h-8 rounded-[50%] bg-gray-700" />
                 </li>
             )}
+            <button onClick={() =>setPubkey(null)}>LOG OUT</button>
         </>
     );
 };
