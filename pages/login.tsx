@@ -5,7 +5,7 @@ import cyberpunks from "../public/cyberpunks.jpg";
 import { EventTemplate, Event } from "nostr-tools";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useNostr } from "@/context/nostr";
+import { usePubkey } from "@/context/pubkey";
 import Link from "next/link";
 import Button from "@/components/Button";
 
@@ -21,7 +21,7 @@ type Nostr = {
 };
 
 export default function Login() {
-  const { setPubkey } = useNostr();
+  const { setPubkey } = usePubkey();
   const router = useRouter();
 
   const [nostrExt, setNostrExt] = useState(false);
