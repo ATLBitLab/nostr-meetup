@@ -67,23 +67,12 @@ class NostrClient {
         created_at: event.created_at
       }
 
-      // TODO: insert into store or db.
-      // Really only want to save if the created_at is more recent than
-      // what is existing
-      console.debug('storing profile metadata: ', metadataToStore)
-      // if metadataToStore.created_at > whatever is stored...
-      // store it
       const existingProfile = await db.users.get(metadataToStore.pubkey)
-      if (!existingProfile) {
+
+      if (!existingProfile || (metadataToStore.created_at > existingProfile.created_at)) {
+        console.debug('storing profile metadata: ', metadataToStore)
         await db.users.put(metadataToStore)
-        return
       }
-
-      if (existingProfile.created_at > metadataToStore.created_at) {
-        return
-      }
-
-      await db.users.put(metadataToStore)
     })
 
 
