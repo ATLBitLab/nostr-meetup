@@ -17,8 +17,6 @@ export interface UserMetadata {
   nip05?: string
 }
 
-// TODO: need global store of queue, profiles
-
 export default function useProfile(pubkey: string | null): [UserMetadata | undefined, boolean] {
   const [profile, isLoading] = useLiveQuery(async () => {
     if (!pubkey) return [undefined, false]

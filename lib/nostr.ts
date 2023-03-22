@@ -52,11 +52,8 @@ class NostrClient {
 
     console.debug('subscribing for pubkeys: ', Array.from(this.profileQueue))
 
-    // TODO: subscribe w/ pool
     const sub = this.pool.sub(defaultProfileRelays, filters)
 
-    // How to handle this? Want the latest created_at profile event to be used.
-    // Each relay can return a different/outdated event
     sub.on('event', async (event: Event) => {
       console.debug('got event', event)
 
