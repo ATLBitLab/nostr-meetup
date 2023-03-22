@@ -1,5 +1,5 @@
 import { SimplePool, Filter, nip19, Event } from "nostr-tools";
-import db from '@/store/dexieDb'
+import dexieDb from '@/store/dexieDb'
 
 export interface UserMetadata {
   name?: string
@@ -57,8 +57,8 @@ class NostrClient {
 
     // How to handle this? Want the latest created_at profile event to be used.
     // Each relay can return a different/outdated event
-    sub.on('event', async (event) => {
-      console.debug('event', event)
+    sub.on('event', async (event: Event) => {
+      console.debug('got event', event)
 
       const metadataToStore: UserMetadataStore = {
         ...JSON.parse(event.content),
@@ -67,11 +67,11 @@ class NostrClient {
         created_at: event.created_at
       }
 
-      const existingProfile = await db.users.get(metadataToStore.pubkey)
+      const existingProfile = await dexieDb.users.get(metadataToStore.pubkey)
 
       if (!existingProfile || (metadataToStore.created_at > existingProfile.created_at)) {
         console.debug('storing profile metadata: ', metadataToStore)
-        await db.users.put(metadataToStore)
+        await dexieDb.users.put(metadataToStore)
       }
     })
 
