@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Comfortaa, Source_Sans_Pro } from "next/font/google";
 import { Bars3Icon } from "@heroicons/react/24/solid";
-import { useProfile } from "nostr-react";
+import useProfile from "@/hooks/useProfile";
 import { usePubkey } from "@/context/pubkey";
 import { nip19 } from "nostr-tools";
 
@@ -14,21 +14,19 @@ interface LandingLayoutProps {
 }
 
 const PubkeyNavMenu = ({ pubkey }: { pubkey: string }) => {
-    const { data: userData, isLoading } = useProfile({
-        pubkey,
-    });
+    const [profile, isLoading] = useProfile(pubkey)
 
     return (
         <>
             {!isLoading && (
                 <li>
-                    {userData?.name
-                        ? userData.name
+                    {profile?.name
+                        ? profile.name
                         : nip19.npubEncode(pubkey).slice(0, 12)}
                 </li>
             )}
-            {userData?.picture ? (
-                <img src={userData.picture} className="w-8 h-8 rounded-[50%]" />
+            {profile?.picture ? (
+                <img src={profile.picture} className="w-8 h-8 rounded-[50%]" />
             ) : (
                 <li>
                     <div className="w-8 h-8 rounded-[50%] bg-gray-700" />
