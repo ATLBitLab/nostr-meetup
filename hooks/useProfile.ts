@@ -19,15 +19,18 @@ export interface UserMetadata {
 
 // TODO: need global store of queue, profiles
 
-export default function useProfile(pubkey: string | null) {
-  const profile = useLiveQuery(async () => {
-    if (!pubkey) return undefined
+export default function useProfile(pubkey: string | null): [UserMetadata | undefined, boolean] {
+  const [profile, isLoading] = useLiveQuery(async () => {
+    if (!pubkey) return [undefined, false]
 
-    console.debug('useLiveQuery: ', pubkey)
     const ret = await dexieDb.users.get(pubkey)
     console.debug('live query res: ', ret)
-    return ret
-  }, [pubkey])
+
+    return [ret, false]
+  }, 
+    [pubkey],
+    [undefined, true] // default result returned on initial render.
+  )
 
   useEffect(() => {
     if (!pubkey) return
@@ -39,5 +42,5 @@ export default function useProfile(pubkey: string | null) {
     }
   }, [pubkey])
  
-  return profile
+  return [profile, isLoading]
 }
