@@ -16,10 +16,10 @@ const relays = [
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <NostrProvider relayUrls={relays} debug={true}>
+    // <NostrProvider relayUrls={relays} debug={true}>
       <PubkeyProvider>
         <Component {...pageProps} />
       </PubkeyProvider>
-    </NostrProvider>
+    // </NostrProvider>
   );
 }

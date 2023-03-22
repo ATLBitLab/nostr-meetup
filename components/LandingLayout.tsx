@@ -3,7 +3,8 @@ import Link from "next/link";
 import React from "react";
 import { Comfortaa, Source_Sans_Pro } from "next/font/google";
 import { Bars3Icon } from "@heroicons/react/24/solid";
-import { useProfile } from "nostr-react";
+// import { useProfile } from "nostr-react";
+import useProfile from "@/hooks/useProfile";
 import { usePubkey } from "@/context/pubkey";
 import { nip19 } from "nostr-tools";
 
@@ -14,9 +15,17 @@ interface LandingLayoutProps {
 }
 
 const PubkeyNavMenu = ({ pubkey }: { pubkey: string }) => {
-    const { data: userData, isLoading } = useProfile({
-        pubkey,
-    });
+    // const { data: userData, isLoading } = useProfile({
+    //     pubkey,
+    // });
+
+    const profile = useProfile(pubkey)
+
+    const isLoading = true
+    const userData = {
+        name: 'chad',
+        picture: 'chad',
+    }
 
     return (
         <>
