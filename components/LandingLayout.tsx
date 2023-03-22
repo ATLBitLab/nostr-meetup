@@ -36,7 +36,7 @@ export default function LandingLayout(props:LandingLayoutProps) {
     return(
         <>
             <Head>
-                <title>{props.title ? props.title + " | " : ""}Catherd</title>
+                <title>{(props.title ? props.title + " | " : "") + "Catherd"}</title>
                 <meta name="description" content={props.description || defaultDescription} />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
