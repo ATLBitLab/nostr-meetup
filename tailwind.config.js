@@ -13,7 +13,13 @@ module.exports = {
       'sans': ["Source Sans Pro", 'sans-serif'],
       'display': ["Comfortaa", 'sans-serif']
     },
-    extend: {},
+    extend: {
+      colors: {
+        purp: {
+          'DEFAULT': '#9555D4'
+        }
+      }
+    },
   },
   plugins: [],
 }

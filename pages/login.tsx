@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useNostr } from "@/context/nostr";
 import Link from "next/link";
+import Button from "@/components/Button";
 
 declare global {
   interface Window {
@@ -55,12 +56,10 @@ export default function Login() {
                 <p className="text-2xl">
                   Log in with a Nostr browser extension.
                 </p>
-                <button
-                  className="border rounded bg-purple-700 text-white px-2 py-1 w-fit"
-                  onClick={handleLogin}
-                >
+
+                <Button onClick={handleLogin}>
                   Log in with Nostr
-                </button>
+                </Button>
               </div>
             ) : (
               <div className="">
@@ -84,11 +83,9 @@ export default function Login() {
 
             <div className="mt-4 flex flex-col gap-2">
               <p className="text-2xl">Not on Nostr yet? Sign up.</p>
-              <Link href="/signup">
-                <button className="border rounded border-purple-700 text-purple-700 px-2 py-1 w-fit">
-                  Sign up
-                </button>
-              </Link>
+              <Button href="/signup" format="secondary">
+                Sign up
+              </Button>
             </div>
           </div>
           <div className="w-full h-full absolute top-0 left-0">
