@@ -66,15 +66,9 @@ export default function LandingLayout(props: LandingLayoutProps) {
     return (
         <>
             <Head>
-                <title>{props.title ? props.title + " | " : ""}Catherd</title>
-                <meta
-                    name="description"
-                    content={props.description || defaultDescription}
-                />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1"
-                />
+                <title>{(props.title ? props.title + " | " : "") + "Catherd"}</title>
+                <meta name="description" content={props.description || defaultDescription} />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
                 <link
                     href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap"

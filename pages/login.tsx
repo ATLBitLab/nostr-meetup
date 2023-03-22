@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { usePubkey } from "@/context/pubkey";
 import Link from "next/link";
+import Button from "@/components/Button";
 
 declare global {
   interface Window {
@@ -51,45 +52,35 @@ export default function Login() {
             <h1 className="font-display text-3xl mb-4">Log in</h1>
 
             {nostrExt ? (
-              <div className="flex flex-col gap-2">
-                <p className="text-2xl">
-                  Log in with a Nostr browser extension.
-                </p>
-                <button
-                  className="border rounded bg-purple-700 text-white px-2 py-1 w-fit"
-                  onClick={handleLogin}
-                >
-                  Log in with Nostr
-                </button>
+              <div className="flex flex-col gap-8">
+                <div className="mt-4 flex flex-col gap-4">
+                  <p className="text-2xl">Not on Nostr yet? Sign up.</p>
+                  <Button href="/signup" format="secondary">
+                    Sign up
+                  </Button>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <p className="text-2xl">
+                    Log in with a Nostr browser extension.
+                  </p>
+
+                  <Button onClick={handleLogin}>
+                    Log in with Nostr
+                  </Button>
+                </div>
               </div>
+              
             ) : (
-              <div className="">
-                <p className="text-2xl">Nostr browser extension required!</p>
-                <span>Get one here: &nbsp;</span>
-                <a
-                  href="https://getalby.com/"
-                  className="capitalize text-purple-700 hover:underline"
-                >
-                  alby
-                </a>
-                <span>,&nbsp;</span>
-                <a
-                  href="https://github.com/fiatjaf/nos2x"
-                  className="capitalize text-purple-700 hover:underline"
-                >
-                  nos2x
-                </a>
+              <div className="flex flex-col gap-8">
+                <p className="text-2xl">
+                  A Nostr browser extension is required to log in to this website.
+                </p>
+
+                <Button href="/signup">
+                  Learn how to sign up
+                </Button>
               </div>
             )}
-
-            <div className="mt-4 flex flex-col gap-2">
-              <p className="text-2xl">Not on Nostr yet? Sign up.</p>
-              <Link href="/signup">
-                <button className="border rounded border-purple-700 text-purple-700 px-2 py-1 w-fit">
-                  Sign up
-                </button>
-              </Link>
-            </div>
           </div>
           <div className="w-full h-full absolute top-0 left-0">
             <Image
