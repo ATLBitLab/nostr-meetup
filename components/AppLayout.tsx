@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Comfortaa, Source_Sans_Pro } from "next/font/google";
 import { Bars3Icon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
-import { useProfile } from "nostr-react";
+import useProfile from "@/hooks/useProfile";
 import { usePubkey } from "@/context/pubkey";
 import { nip19 } from "nostr-tools";
 import Button from "./Button";
@@ -51,6 +51,8 @@ export default function AppLayout(props: AppLayoutProps) {
 
     const PubkeyNavMenu = ({ pubkey }: { pubkey: string }) => {
         const { setPubkey } = usePubkey();
+        const [profile, isLoading] = useProfile(pubkey)
+
         // const { data: userData, isLoading } = useProfile({
         //     pubkey,
         // });
@@ -68,13 +70,13 @@ export default function AppLayout(props: AppLayoutProps) {
     
                 <li className="flex flex-row gap-2 items-center">
                     {!isLoading && (
-                        userData?.name
-                            ? userData.name
+                        profile?.name
+                            ? profile.name
                             : nip19.npubEncode(pubkey).slice(0, 12)
                     )}
     
-                    {userData?.picture ? (
-                        <img src={userData.picture} className="w-8 h-8 rounded-[50%]" />
+                    {profile?.picture ? (
+                        <img src={profile.picture} className="w-8 h-8 rounded-[50%]" />
                     ) : (
                         <div className="w-8 h-8 rounded-[50%] bg-gray-700" />
                     )}
