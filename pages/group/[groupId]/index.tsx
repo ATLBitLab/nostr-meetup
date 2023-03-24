@@ -3,8 +3,11 @@ import AppLayout from '@/components/AppLayout'
 import Image from 'next/image'
 import EventCard from '@/components/EventCard'
 import Button from '@/components/Button'
+import { useState } from 'react'
 
 export default function GroupDetail() {
+  const [member, setMember] = useState(false)
+  
   const dummyOrganizers = [
     {
       name: 'Stephen DeLorme'
@@ -64,7 +67,15 @@ export default function GroupDetail() {
                 When lambo UTXO double-spend problem, timestamp server genesis block mining difficulty block height. Hard fork when lambo address satoshis peer-to-peer, money printer go brrrrr timestamp server stacking sats, public key. Peer-to-peer blocksize transaction hodl block height hash few understand this. Segwit outputs.
               </p>
 
-              <Button>Join Group</Button>
+              {!member ? 
+              <Button onClick={()=>{setMember(true)}}>
+                Join Group
+              </Button>
+              :
+              <Button onClick={()=>{setMember(true)}} disabled>
+                You're a member
+              </Button>
+              }
             </div>
             <div className="order-first w-2/5">
               <Image src="/opt/group-abstract-1.jpg" alt="" width="832" height="480" className="w-full h-auto rounded-lg" />

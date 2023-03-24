@@ -6,7 +6,8 @@ type GroupCardProps = {
     imageSrc: string,
     name: string,
     desc: string,
-    id: string
+    id: string,
+    member?: boolean
 }
 
 export default function GroupCard(props:GroupCardProps){
@@ -22,9 +23,11 @@ export default function GroupCard(props:GroupCardProps){
                         <Link href={'/group/' + props.id}>{props.name}</Link>
                     </h2>
                     <p>{props.desc}</p>
+                    {!props.member ?
                     <Button href={'/group/' + props.id}>
                         Join Group
                     </Button>
+                    : ``}
                 </div>
             </div>
         </>

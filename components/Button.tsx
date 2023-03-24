@@ -5,7 +5,8 @@ type ButtonProps = {
     onClick?: () => void,
     children: ReactNode,
     format?: 'primary' | 'secondary' | 'free',
-    href?: string
+    href?: string,
+    disabled?: boolean
 }
 
 export default function Button(props:ButtonProps){
@@ -14,12 +15,15 @@ export default function Button(props:ButtonProps){
     else if(props.format === 'free') className += " text-purp border-0"
     else className += " text-white bg-purp"
 
+    if(props.disabled) className += " bg-gray-500"
+
     if(!props.href) {
         return(
             <>
                 <button
                     className={className}
                     onClick={props.onClick}
+                    disabled={props.disabled}
                 >
                     {props.children}
                 </button>

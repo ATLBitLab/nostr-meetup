@@ -18,7 +18,7 @@ interface AppLayoutProps {
 const menuItemsLoggedOut = [
     {
         name: "Feed",
-        uri: "/feed",
+        uri: "/me",
     },
     {
         name: "Log In",
@@ -31,6 +31,10 @@ const menuItemsLoggedOut = [
 ];
 
 const menuItemsLoggedIn = [
+    {
+        name: "My Feed",
+        uri: "/me",
+    },
     {
         name: "All Groups",
         uri: "/groups",
