@@ -67,15 +67,24 @@ export default function GroupDetail() {
                 When lambo UTXO double-spend problem, timestamp server genesis block mining difficulty block height. Hard fork when lambo address satoshis peer-to-peer, money printer go brrrrr timestamp server stacking sats, public key. Peer-to-peer blocksize transaction hodl block height hash few understand this. Segwit outputs.
               </p>
 
-              {!member ? 
-              <Button onClick={()=>{setMember(true)}}>
-                Join Group
-              </Button>
-              :
-              <Button onClick={()=>{setMember(true)}} disabled>
-                You're a member
-              </Button>
-              }
+              <div className="flex flex-row gap-4">
+                {!member ? 
+                <Button onClick={()=>{setMember(true)}}>
+                  Join Group
+                </Button>
+                :
+                <Button onClick={()=>{setMember(true)}} disabled>
+                  You're a member
+                </Button>
+                }
+
+                {member ? 
+                <Button href="/group/abc123/create">
+                  Schedule Event
+                </Button>
+                : ``}
+              </div>
+              
             </div>
             <div className="order-first w-2/5">
               <Image src="/opt/group-abstract-1.jpg" alt="" width="832" height="480" className="w-full h-auto rounded-lg" />
