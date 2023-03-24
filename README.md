@@ -3,6 +3,7 @@
 - [Project Specs](https://docs.google.com/document/d/1ZzTEw7VY2lM3Ej7v5QMuFmtgnEl4lKYvds8D3I-6yUk/edit?usp=sharing)
 - [Figma File](https://www.figma.com/file/KYsv36ixjrCDUVjFcaYhuU/Nostr-Meetup?node-id=0%3A1&t=Cg80Er1iyBbrjM7U-1)
 - [Bolt.Fun Page](https://makers.bolt.fun/project/meetr)
+- [Custom Nostr Relay](https://github.com/terminus-btc/nostr-meetup-relay)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
