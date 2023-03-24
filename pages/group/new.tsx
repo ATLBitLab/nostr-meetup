@@ -4,10 +4,46 @@ import InputText from '@/components/InputText'
 import TextArea from '@/components/TextArea'
 import Button from '@/components/Button'
 import { SetStateAction, useState } from 'react'
+import { useNostr } from 'nostr-react'
+import { usePubkey } from '@/context/pubkey'
+import { Event, getEventHash, UnsignedEvent, validateEvent, verifySignature } from 'nostr-tools'
 
 export default function SearchResults() {
+  const { publish } = useNostr()
+  const { pubkey } = usePubkey()
   const [groupName, setGroupName] = useState('')
   const [groupDesc, setGroupDesc] = useState('')
+
+  const publishGroup = async (e: any) => {
+    e.preventDefault()
+
+    const content = {
+      name: groupName,
+      description: groupDesc
+    }
+
+    const event: any = {
+      content: JSON.stringify(content),
+      kind: 600,
+      tags: [],
+      created_at: Math.round(Date.now() / 1000) 
+    };
+
+    try {
+      const signedEvent = await window.nostr.signEvent(event)
+      console.debug('signedEvent', signedEvent)
+      let ok = validateEvent(signedEvent)
+      if (!ok) throw new Error('Invalid event')
+      let veryOk = verifySignature(signedEvent)
+      if (!veryOk) throw new Error('Invalid signature')
+
+      console.debug('event id', signedEvent.id)
+      publish(signedEvent)
+    } catch (err: any) {
+      console.error(err.message)
+    }
+
+  }
 
   return (
     <>
@@ -31,9 +67,9 @@ export default function SearchResults() {
               rows={5}
             />
 
-            <Button>Create Group</Button>
-          </form>
-        </div>
+          <Button onClick={publishGroup}>Create Group</Button>
+        </form>
+      </div>
       </AppLayout>
     </>
   )

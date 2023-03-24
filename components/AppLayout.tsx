@@ -51,9 +51,10 @@ export default function AppLayout(props: AppLayoutProps) {
 
     const PubkeyNavMenu = ({ pubkey }: { pubkey: string }) => {
         const { setPubkey } = usePubkey();
-        const { data: userData, isLoading } = useProfile({
-            pubkey,
-        });
+        // const { data: userData, isLoading } = useProfile({
+        //     pubkey,
+        // });
+        const userData = null
     
         return (
             <>
