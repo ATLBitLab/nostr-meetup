@@ -4,11 +4,25 @@ import Image from 'next/image'
 import EventCard from '@/components/EventCard'
 import Button from '@/components/Button'
 import { useState } from 'react'
+import { useNostrEvents } from 'nostr-react'
+import { Kind } from 'nostr-tools'
 
 export default function GroupDetail() {
   const [member, setMember] = useState(false)
+
+  type EventData = {
+    name: string,
+    date: string,
+    attendeeCount: number,
+    desc: string,
+    id: string,
+    imgSrc: string,
+  };
+  type OrganizerData = {
+    name: string;
+  }
   
-  const dummyOrganizers = [
+  const dummyOrganizers: OrganizerData[] = [
     {
       name: 'Stephen DeLorme'
     },
@@ -19,8 +33,8 @@ export default function GroupDetail() {
       name: 'Bryan Nonni'
     },
   ]
-
-  const dummyEvents = [
+    
+  const dummyEvents: EventData[] = [
     {
       name: 'Event Title 1',
       date: 'Saturday, April 1, 2023 11:30am',
@@ -58,6 +72,13 @@ export default function GroupDetail() {
       location: 'Event Location',
     },
   ]
+  const { events } = useNostrEvents({
+      filter: {
+          kinds: [600, 700],
+      }
+  })
+  const groups = events.filter(e => e.kind === 600 as Kind);
+  const sessions = events.filter(e => e.kind === 700 as Kind)
 
   return (
     <>

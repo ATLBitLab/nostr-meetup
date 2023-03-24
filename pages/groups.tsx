@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import AppLayout from '@/components/AppLayout'
 import GroupCard from '@/components/GroupCard'
+import { useEffect, useRef, useState } from 'react';
+import { dateToUnix, useNostrEvents } from 'nostr-react';
 
 export default function Feed() {
     const dummyGroupData = [
@@ -53,6 +55,32 @@ export default function Feed() {
             id: 'abc123',
         },
     ]
+    const filter = (content): GroupData => {
+        return {
+            name: content?.name,
+            desc: content?.description,
+            imageSrc: `/opt/group-abstract-${Math.floor(Math.random() * 4)}.jpg`,
+            id: content?.name
+        }
+    }
+    type GroupData = {
+        name: string,
+        desc: string,
+        imageSrc: string,
+        id: string,
+    }
+    const { events } = useNostrEvents({
+        filter: {
+            kinds: [600],
+        }
+    })
+
+    const mapped = events.map(x => {
+        try {
+            return JSON.parse(x.content);
+        } catch (e) {
+        }
+    });
 
     return (
         <>
@@ -60,13 +88,10 @@ export default function Feed() {
                 <div className="max-w-6xl min-h-full mx-auto p-4 lg:p-16 lg:pt-16 flex flex-col gap-4">
                     <h1 className="text-4xl font-display">Groups</h1>
                     <div className="flex flex-row flex-wrap gap-8">
-                        {dummyGroupData.map((group)=>(
+                        {mapped.map((group)=>(
                             <>
                                 <GroupCard
-                                    name={group.name}
-                                    desc={group.desc}
-                                    imageSrc={group.imgSrc}
-                                    id={group.id}
+                                    {...filter(group)}
                                 />
                             </>
                         ))}
