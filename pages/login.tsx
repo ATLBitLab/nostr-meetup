@@ -35,7 +35,7 @@ export default function Login() {
       const pubkey = await window.nostr.getPublicKey();
       setPubkey(pubkey);
 
-      router.push("/feed");
+      router.push("/groups");
     } catch (error) {
       console.error(error);
     }
