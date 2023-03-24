@@ -17,11 +17,11 @@ export default function GroupDetail() {
     desc: string,
     id: string,
     imgSrc: string,
+    location: string,
   };
   type OrganizerData = {
     name: string;
   }
-  
   const dummyOrganizers: OrganizerData[] = [
     {
       name: 'Stephen DeLorme'
@@ -33,53 +33,52 @@ export default function GroupDetail() {
       name: 'Bryan Nonni'
     },
   ]
-    
-  const dummyEvents: EventData[] = [
-    {
-      name: 'Event Title 1',
-      date: 'Saturday, April 1, 2023 11:30am',
-      attendeeCount: 121,
-      desc: 'Consensus cryptocurrency, hard fork nonce decentralized SHA-256, genesis block miner, blockchain! Pizza Bitcoin Improvement Proposal, halvening public key satoshis freefall together, bitcoin halvening. Transaction sats freefall together UTXO wallet consensus nonce Satoshi Nakamoto. Bitcoin Improvement Proposal blocksize soft fork, SHA-256, consensus full node pizza, sats. Difficulty, whitepaper.',
-      id: 'def456',
-      imgSrc: '/opt/group-abstract-1.jpg',
-      location: 'Event Location',
-    },
-    {
-      name: 'Event Title 2',
-      date: 'Saturday, April 8, 2023 11:30am',
-      attendeeCount: 98,
-      desc: 'Consensus cryptocurrency, hard fork nonce decentralized SHA-256, genesis block miner, blockchain! Pizza Bitcoin Improvement Proposal, halvening public key satoshis freefall together, bitcoin halvening. Transaction sats freefall together UTXO wallet consensus nonce Satoshi Nakamoto. Bitcoin Improvement Proposal blocksize soft fork, SHA-256, consensus full node pizza, sats. Difficulty, whitepaper.',
-      id: 'def456',
-      imgSrc: '/opt/group-abstract-1.jpg',
-      location: 'Event Location',
-    },
-    {
-      name: 'Event Title 3',
-      date: 'Saturday, April 15, 2023 11:30am',
-      attendeeCount: 101,
-      desc: 'Consensus cryptocurrency, hard fork nonce decentralized SHA-256, genesis block miner, blockchain! Pizza Bitcoin Improvement Proposal, halvening public key satoshis freefall together, bitcoin halvening. Transaction sats freefall together UTXO wallet consensus nonce Satoshi Nakamoto. Bitcoin Improvement Proposal blocksize soft fork, SHA-256, consensus full node pizza, sats. Difficulty, whitepaper.',
-      id: 'def456',
-      imgSrc: '/opt/group-abstract-1.jpg',
-      location: 'Event Location',
-    },
-    {
-      name: 'Event Title 4',
-      date: 'Saturday, April 22, 2023 11:30am',
-      attendeeCount: 57,
-      desc: 'Consensus cryptocurrency, hard fork nonce decentralized SHA-256, genesis block miner, blockchain! Pizza Bitcoin Improvement Proposal, halvening public key satoshis freefall together, bitcoin halvening. Transaction sats freefall together UTXO wallet consensus nonce Satoshi Nakamoto. Bitcoin Improvement Proposal blocksize soft fork, SHA-256, consensus full node pizza, sats. Difficulty, whitepaper.',
-      id: 'def456',
-      imgSrc: '/opt/group-abstract-1.jpg',
-      location: 'Event Location',
-    },
-  ]
+  
+  const dummy = {
+    name: 'Event Title 1',
+    date: 'Saturday, April 1, 2023 11:30am',
+    attendeeCount: 121,
+    desc: 'Consensus cryptocurrency, hard fork nonce decentralized SHA-256, genesis block miner, blockchain! Pizza Bitcoin Improvement Proposal, halvening public key satoshis freefall together, bitcoin halvening. Transaction sats freefall together UTXO wallet consensus nonce Satoshi Nakamoto. Bitcoin Improvement Proposal blocksize soft fork, SHA-256, consensus full node pizza, sats. Difficulty, whitepaper.',
+    id: 'def456',
+    imgSrc: '/opt/group-abstract-1.jpg',
+    location: 'Event Location',
+  };
+
+  const filterEvent = (content): EventData => {
+      return {
+          name: content?.name,
+          date: content?.date,
+          desc: content?.description,
+          attendeeCount: Math.floor(Math.random() * 25),
+          imgSrc: `/opt/group-abstract-${Math.floor(Math.random() * 4)}.jpg`,
+          id: content?.name,
+          location: 'ATL BAYBEE'
+      }
+  }
+  const filterGroups = (content): EventData => {
+    console.log('content', content, typeof content);
+      return {
+          name: content?.name,
+          date: content?.date,
+          desc: content?.description,
+          attendeeCount: Math.floor(Math.random() * 25),
+          imgSrc: `/opt/group-abstract-${Math.floor(Math.random() * 4)}.jpg`,
+          id: content?.name,
+          location: 'ATL BAYBEE'
+      }
+  }
   const { events } = useNostrEvents({
       filter: {
           kinds: [600, 700],
       }
   })
   const groups = events.filter(e => e.kind === 600 as Kind);
-  const sessions = events.filter(e => e.kind === 700 as Kind)
-
+  const sessions = events.filter(e => e.kind === 700 as Kind);
+  const mappedGroup = filterGroups(groups ? JSON.parse(groups[0]?.content ?? "{}") : "{}" ?? "{}");
+  // console.log('groups', groups);
+  // console.log(mappedGroup);
+  // console.log('sessions', sessions);
+  // console.log('session', sessions);
   return (
     <>
       <AppLayout title="Group Detail" description="All about this group">
@@ -87,7 +86,7 @@ export default function GroupDetail() {
           {/* Group Info */}
           <div className="flex flex-row gap-8">
             <div className="flex flex-col gap-4 w-3/5">
-              <h1 className="text-4xl font-display">Group Name 1</h1>
+              <h1 className="text-4xl font-display">{mappedGroup.name}</h1>
               <p className="text-lg">
                 When lambo UTXO double-spend problem, timestamp server genesis block mining difficulty block height. Hard fork when lambo address satoshis peer-to-peer, money printer go brrrrr timestamp server stacking sats, public key. Peer-to-peer blocksize transaction hodl block height hash few understand this. Segwit outputs.
               </p>
@@ -137,16 +136,10 @@ export default function GroupDetail() {
           <div className="flex flex-col gap-8">
             <h2 className="text-3xl font-display">Upcoming Events</h2>
             <div className="flex flex-col gap-8">
-              {dummyEvents.map((event)=>(
+              {sessions.map((session) => (
                 <>
                   <EventCard
-                    name={event.name}
-                    date={event.date}
-                    desc={event.desc}
-                    attendeeCount={event.attendeeCount}
-                    imgSrc={event.imgSrc}
-                    id={event.id}
-                    location={event.location}
+                    {...filterEvent(session)}
                   />
                 </>
               ))}
