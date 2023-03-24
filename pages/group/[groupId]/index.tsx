@@ -74,7 +74,7 @@ export default function GroupDetail() {
                 </Button>
                 :
                 <Button onClick={()=>{setMember(true)}} disabled>
-                  You're a member
+                  You&rsquo;re a member
                 </Button>
                 }
 
