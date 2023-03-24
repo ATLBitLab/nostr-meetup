@@ -17,10 +17,6 @@ interface AppLayoutProps {
 
 const menuItemsLoggedOut = [
     {
-        name: "Feed",
-        uri: "/me",
-    },
-    {
         name: "Log In",
         uri: "/login",
     },
