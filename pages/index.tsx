@@ -1,4 +1,4 @@
-import LandingLayout from '@/components/LandingLayout'
+import AppLayout from '@/components/AppLayout'
 import Tag from '@/components/Tag'
 import Image from 'next/image'
 import collegeStudents from '../public/college-students.jpg'
@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <>
-      <LandingLayout description="Meetup with folks using Nostr meetup">
+      <AppLayout description="Meetup with folks using Nostr meetup">
         <div className="bg-purple-600 min-h-full p-4 lg:p-16 lg:pt-24">
           <div className="relative z-10 bg-white p-4 rounded-md drop-shadow-sm max-w-2xl h-auto ml-auto lg:p-12">
             <h1 className="sr-only">Nostr Meetup</h1>
@@ -58,7 +58,7 @@ export default function Home() {
           </div>
           
         </div>
-      </LandingLayout>
+      </AppLayout>
     </>
   )
 }
