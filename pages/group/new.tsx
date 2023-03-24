@@ -6,20 +6,22 @@ import Button from '@/components/Button'
 import { SetStateAction, useState } from 'react'
 import { useNostr } from 'nostr-react'
 import { usePubkey } from '@/context/pubkey'
-import { Event, getEventHash, UnsignedEvent, validateEvent, verifySignature } from 'nostr-tools'
+import { validateEvent, verifySignature } from 'nostr-tools'
 
 export default function SearchResults() {
   const { publish } = useNostr()
   const { pubkey } = usePubkey()
   const [groupName, setGroupName] = useState('')
   const [groupDesc, setGroupDesc] = useState('')
+  const [groupPicture, setGroupPicture] = useState('')
 
   const publishGroup = async (e: any) => {
     e.preventDefault()
 
     const content = {
       name: groupName,
-      description: groupDesc
+      description: groupDesc,
+      picture: groupPicture
     }
 
     const event: any = {
@@ -57,6 +59,13 @@ export default function SearchResults() {
               placeholder="My group"
               value={groupName}
               onChange={(e)=>{setGroupName(e.target.value)}}
+            />
+
+            <InputText
+              label="Group Picture"
+              placeholder="Group picture url"
+              value={groupPicture}
+              onChange={(e)=>{setGroupPicture(e.target.value)}}
             />
             
             <TextArea
