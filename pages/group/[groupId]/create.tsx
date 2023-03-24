@@ -29,15 +29,15 @@ export default function Login() {
           <InputText
             label="Date"
             placeholder="Saturday, April 1, 2023 11:30am"
-            value={eventTitle}
-            onChange={(e)=>{setEventTitle(e.target.value)}}
+            value={eventDate}
+            onChange={(e)=>{setEventDate(e.target.value)}}
           />
           
           <InputText
             label="Location"
             placeholder="Carla & Walker's Old Timey Saloon"
-            value={eventTitle}
-            onChange={(e)=>{setEventTitle(e.target.value)}}
+            value={eventLocation}
+            onChange={(e)=>{setEventLocation(e.target.value)}}
           />
 
           <TextArea
