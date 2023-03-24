@@ -7,11 +7,13 @@ import type { AppProps } from "next/app";
 // relays in a smart way based off who they are interacting with
 // ...or just leave as fixed for hackathon (we have custom relay anyways)
 const relays = [
-  "wss://nostr.terminus.money",
-  "wss://brb.io",
-  "wss://nostr.wine",
-  "wss://relay.snort.social",
-  "wss://gratten.duckdns.org/nostrrelay/relay2",
+  // "wss://nostr.terminus.money",
+  // "wss://brb.io",
+  // "wss://nostr.wine",
+  // "wss://relay.snort.social",
+  // "wss://gratten.duckdns.org/nostrrelay/relay2",
+  "ws://localhost:8080"
+  // "wss://relay.meetup.terminus.money"
 ];
 
 export default function App({ Component, pageProps }: AppProps) {
