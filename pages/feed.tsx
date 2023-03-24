@@ -1,12 +1,12 @@
 import Head from 'next/head'
-import LandingLayout from '@/components/LandingLayout'
+import AppLayout from '@/components/AppLayout'
 
 export default function Feed() {
   return (
     <>
-      <LandingLayout title="Feed" description="Latest events">
+      <AppLayout title="Feed" description="Latest events">
         <div>This is the feed page</div>
-      </LandingLayout>
+      </AppLayout>
     </>
   )
 }

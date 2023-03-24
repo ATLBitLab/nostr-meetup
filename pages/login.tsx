@@ -1,5 +1,5 @@
 import Head from "next/head";
-import LandingLayout from "@/components/LandingLayout";
+import AppLayout from "@/components/AppLayout";
 import Image from "next/image";
 import cyberpunks from "../public/cyberpunks.jpg";
 import { EventTemplate, Event } from "nostr-tools";
@@ -43,7 +43,7 @@ export default function Login() {
 
   return (
     <>
-      <LandingLayout
+      <AppLayout
         title="Login"
         description="Log in to Nostr Meetup easily with your Nostr profile."
       >
@@ -90,7 +90,7 @@ export default function Login() {
             />
           </div>
         </div>
-      </LandingLayout>
+      </AppLayout>
     </>
   );
 }
