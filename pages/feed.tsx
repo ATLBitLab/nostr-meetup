@@ -5,7 +5,9 @@ export default function Feed() {
   return (
     <>
       <AppLayout title="Feed" description="Latest events">
-        <div>This is the feed page</div>
+        <div>
+          This is the feed page
+        </div>
       </AppLayout>
     </>
   )

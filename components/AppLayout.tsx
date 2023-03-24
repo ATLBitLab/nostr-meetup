@@ -9,7 +9,7 @@ import { nip19 } from "nostr-tools";
 import Button from "./Button";
 import Router, { useRouter } from "next/router";
 
-interface LandingLayoutProps {
+interface AppLayoutProps {
     title?: string;
     description?: string;
     children: React.ReactNode;
@@ -32,12 +32,16 @@ const menuItemsLoggedOut = [
 
 const menuItemsLoggedIn = [
     {
-        name: "Groups",
+        name: "All Groups",
         uri: "/groups",
+    },
+    {
+        name: "Create New Group",
+        uri: "/group/new",
     }
 ];
 
-export default function LandingLayout(props: LandingLayoutProps) {
+export default function AppLayout(props: AppLayoutProps) {
     const defaultDescription = "Find meetup groups and events";
     const [menuOpen, setMenuOpen] = React.useState(false);
 

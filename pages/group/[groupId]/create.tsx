@@ -6,7 +6,9 @@ export default function Login() {
     <>
       <AppLayout title="Search results" description="Search for events near you">
         <h1>Create Event</h1>
-        Create your event here
+        
+        
+
       </AppLayout>
     </>
   )
