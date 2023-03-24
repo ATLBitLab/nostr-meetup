@@ -42,6 +42,7 @@ export default function GroupDetail() {
       desc: 'Consensus cryptocurrency, hard fork nonce decentralized SHA-256, genesis block miner, blockchain! Pizza Bitcoin Improvement Proposal, halvening public key satoshis freefall together, bitcoin halvening. Transaction sats freefall together UTXO wallet consensus nonce Satoshi Nakamoto. Bitcoin Improvement Proposal blocksize soft fork, SHA-256, consensus full node pizza, sats. Difficulty, whitepaper.',
       id: 'def456',
       imgSrc: '/opt/group-abstract-1.jpg',
+      location: 'Event Location',
     },
     {
       name: 'Event Title 2',
@@ -50,6 +51,7 @@ export default function GroupDetail() {
       desc: 'Consensus cryptocurrency, hard fork nonce decentralized SHA-256, genesis block miner, blockchain! Pizza Bitcoin Improvement Proposal, halvening public key satoshis freefall together, bitcoin halvening. Transaction sats freefall together UTXO wallet consensus nonce Satoshi Nakamoto. Bitcoin Improvement Proposal blocksize soft fork, SHA-256, consensus full node pizza, sats. Difficulty, whitepaper.',
       id: 'def456',
       imgSrc: '/opt/group-abstract-1.jpg',
+      location: 'Event Location',
     },
     {
       name: 'Event Title 3',
@@ -58,6 +60,7 @@ export default function GroupDetail() {
       desc: 'Consensus cryptocurrency, hard fork nonce decentralized SHA-256, genesis block miner, blockchain! Pizza Bitcoin Improvement Proposal, halvening public key satoshis freefall together, bitcoin halvening. Transaction sats freefall together UTXO wallet consensus nonce Satoshi Nakamoto. Bitcoin Improvement Proposal blocksize soft fork, SHA-256, consensus full node pizza, sats. Difficulty, whitepaper.',
       id: 'def456',
       imgSrc: '/opt/group-abstract-1.jpg',
+      location: 'Event Location',
     },
     {
       name: 'Event Title 4',
@@ -66,6 +69,7 @@ export default function GroupDetail() {
       desc: 'Consensus cryptocurrency, hard fork nonce decentralized SHA-256, genesis block miner, blockchain! Pizza Bitcoin Improvement Proposal, halvening public key satoshis freefall together, bitcoin halvening. Transaction sats freefall together UTXO wallet consensus nonce Satoshi Nakamoto. Bitcoin Improvement Proposal blocksize soft fork, SHA-256, consensus full node pizza, sats. Difficulty, whitepaper.',
       id: 'def456',
       imgSrc: '/opt/group-abstract-1.jpg',
+      location: 'Event Location',
     },
   ]
   const { events } = useNostrEvents({
@@ -135,7 +139,15 @@ export default function GroupDetail() {
             <div className="flex flex-col gap-8">
               {dummyEvents.map((event)=>(
                 <>
-                  <EventCard />
+                  <EventCard
+                    name={event.name}
+                    date={event.date}
+                    desc={event.desc}
+                    attendeeCount={event.attendeeCount}
+                    imgSrc={event.imgSrc}
+                    id={event.id}
+                    location={event.location}
+                  />
                 </>
               ))}
             </div>
