@@ -1,5 +1,7 @@
 # Cat Herd
 
+**This project was made for a nostr hackathon. It is not actively maintained in its archive for posterity.**
+
 A nostr client for scheduling and finding in-person meetups
 
 ![Landing page of Cat Herd](public/cat-herd-cover.jpg)
